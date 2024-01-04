@@ -1,4 +1,4 @@
-export type KindType = '系统消息' | '评论消息' | '点赞消息' | '关注消息' | '私信消息'
+export type KindType = '回复我的' | '@我的' | '收到的赞' | '系统通知' | '我的消息'
 
 export interface Message {
   kind: KindType

@@ -1,41 +1,19 @@
 <script setup lang="ts">
 import type { KindType, Message } from '../types/message'
+import ReplyToMe from '~/components/Notice/ReplyToMe.vue'
+import AtMe from '~/components/Notice/AtMe.vue'
+import ReceivedLike from '~/components/Notice/ReceivedLike.vue'
+import SystemNotice from '~/components/Notice/SystemNotice.vue'
+import MyNotice from '~/components/Notice/MyNotice.vue'
 
 const message = useMessageStore()
 
-const Kinds = ['系统消息', '评论消息', '点赞消息', '关注消息', '私信消息'] as KindType[]
-
-const data: Message[] = [
-  {
-    kind: '系统消息',
-    from: '系统',
-    content: '欢迎使用',
-  },
-  {
-    kind: '评论消息',
-    from: '用户1',
-    content: '评论了你的文章',
-  },
-  {
-    kind: '点赞消息',
-    from: '用户2',
-    content: '点赞了你的文章',
-  },
-  {
-    kind: '关注消息',
-    from: '用户3',
-    content: '关注了你',
-  },
-  {
-    kind: '私信消息',
-    from: '用户4',
-    content: '发来了一条私信',
-  },
-]
+const Kinds = ['回复我的', '@我的', '收到的赞', '系统通知', '我的消息'] as KindType[]
+const Components = [ReplyToMe, AtMe, ReceivedLike, SystemNotice, MyNotice]
 </script>
 
 <template>
-  <div class="main" flex-1>
+  <div class="main" h-160 flex-1 overflow-scroll>
     <div class="chooseLine" inline-block h-100vh bg-gray-1 p-5 align-top font-semibold>
       <span class="title" mb-5>
         <span i-carbon-send-alt inline-block h-3 w-3 />
@@ -44,11 +22,11 @@ const data: Message[] = [
       <ul>
         <li
           v-for="(kind, index) in Kinds" :key="index" class="kinds"
-          mt-5 cursor-pointer p-2 hover:text-blue-4
-          text="gray-5"
+          text="gray-5" mt-5 cursor-pointer p-2 font-size-3.5
+          hover:text-blue-4
           @click="message.setNewKind(kind)"
         >
-          {{ kind }}
+          · {{ kind }}
         </li>
       </ul>
     </div>
@@ -60,7 +38,10 @@ const data: Message[] = [
       >
         {{ message.nowKind }}
       </span>
-      <ul>
+      <component
+        :is="Components[Kinds.indexOf(message.nowKind)]"
+      />
+      <!-- <ul>
         <template
           v-for="(item, index) in data.map((item) => {
             console.log(item);
@@ -75,7 +56,7 @@ const data: Message[] = [
             {{ item }}
           </li>
         </template>
-      </ul>
+      </ul> -->
     </div>
   </div>
 </template>

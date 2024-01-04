@@ -69,4 +69,5 @@ export default defineNuxtConfig({
     },
   ],
   plugins: ['~/plugins/element-plus.ts'],
+  ssr: false,
 })
