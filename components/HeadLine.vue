@@ -15,11 +15,9 @@ onMounted(() => {
       </NuxtLink>
     </div>
     <div flex justify-center>
-      <span v-for="item in 5" :key="item" ml-4>
-        <NuxtLink :to="`/choices/choices${item}`">
-          choices{{ item }}
-        </NuxtLink>
-      </span>
+      <NuxtLink to="/List">
+        List
+      </NuxtLink>
     </div>
     <div text="right" float-right mr-10 flex-1>
       <NuxtLink to="/createAndCharge">

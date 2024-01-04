@@ -23,3 +23,14 @@ export interface Action {
   icon: string
   num: number
 }
+
+export interface Video {
+  authorId: number
+  comment_count: number
+  cover_url: string
+  createAt: number
+  duration: number
+  id: number
+  playCount: number
+  title: string
+}
